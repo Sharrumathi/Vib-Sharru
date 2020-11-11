@@ -8,7 +8,7 @@ import { defaultTheme } from 'react-select';
 const sampleJson = [
     {
         "id": 1,
-        "taskName": 'aaa',
+        "taskName": 'task 1',
         "lob": 'MEDICARE',
         "subTask": 'aaa',
         "step": 0,
@@ -17,7 +17,7 @@ const sampleJson = [
     },
     {
         "id": 2,
-        "taskName": 'bbb',
+        "taskName": 'task 2',
         "lob": 'COMMERCIAL',
         "subTask": 'bbb',
         "step": 0,
@@ -26,7 +26,7 @@ const sampleJson = [
     },
     {
         "id": 3,
-        "taskName": 'ccc',
+        "taskName": 'task 3',
         "lob": 'EXCHANGE',
         "subTask": 'ccc',
         "step": 1,
@@ -35,7 +35,7 @@ const sampleJson = [
     },
     {
         "id": 4,
-        "taskName": 'ddd',
+        "taskName": 'task 4',
         "lob": 'MEDICAID',
         "subTask": 'ddd',
         "step": 1,
@@ -44,7 +44,7 @@ const sampleJson = [
     },
     {
         "id": 5,
-        "taskName": 'eee',
+        "taskName": 'task 5',
         "lob": 'EXCHANGE',
         "subTask": 'eee',
         "step": 1,
@@ -53,7 +53,7 @@ const sampleJson = [
     },
     {
         "id": 6,
-        "taskName": 'ddd',
+        "taskName": 'task 6',
         "lob": 'MEDICAID',
         "subTask": 'ddd',
         "step": 0,
@@ -63,7 +63,7 @@ const sampleJson = [
 
     {
         "id": 7,
-        "taskName": 'eee',
+        "taskName": 'task 7',
         "lob": 'MEDICAID',
         "subTask": 'eee',
         "step": 1,
@@ -72,7 +72,7 @@ const sampleJson = [
     },
     {
         "id": 8,
-        "taskName": 'fff',
+        "taskName": 'task 8',
         "lob": 'EXCHANGE',
         "subTask": 'fff',
         "step": 1,
@@ -81,7 +81,7 @@ const sampleJson = [
     },
     {
         "id": 9,
-        "taskName": 'ggg',
+        "taskName": 'task 9',
         "lob": 'MEDICAID',
         "subTask": 'ggg',
         "step": 0,
@@ -116,11 +116,11 @@ const DropdownIndicator = () => (
 );
 
 const dropDownMenuList = [
-        {name: 'Unassigned', value: 'Unassigned'},
-        {name: 'Assigned', value: 'Assigned'},
-        {name: 'Derek Roberts', value: 'Derek Roberts'},
-        {name: 'Nichole Smith', value: 'Nichole Smith'},
-    
+    { name: 'Unassigned', value: 'Unassigned' },
+    { name: 'Assigned', value: 'Assigned' },
+    { name: 'Derek Roberts', value: 'Derek Roberts' },
+    { name: 'Nichole Smith', value: 'Nichole Smith' },
+
 ]
 
 class Table extends React.Component {
@@ -161,7 +161,6 @@ class Table extends React.Component {
         input = e.target.value;
         filter = dropDownMenuList.filter(item => {
             // const res = item.name.fi
-            console.log('result-----', item)
         });
         console.log('filter', filter)
         // div = document.getElementById("myDropdown");
@@ -175,7 +174,7 @@ class Table extends React.Component {
         //     }
         // }
     }
-   
+
     receivedData() {
 
         const selectStyles = {
@@ -197,7 +196,6 @@ class Table extends React.Component {
 
         const slice = data.length !== 0 && data.slice(this.state.offset, this.state.offset + this.state.perPage)
 
-        // $(".chosen").chosen();
         const postData = data.length !== 0 && slice.map((item) =>
 
             <tr key={item.id}>
@@ -207,42 +205,14 @@ class Table extends React.Component {
                 <td>{item.lob === 'MEDICAID' ? (<span className="badge badge-pill badge-light peach">MEDICAID</span>) : item.lob === 'EXCHANGE' ? (<span className="badge badge-pill badge-light exchange">EXCHANGE</span>) : item.lob === 'COMMERCIAL' ? (<span className="badge badge-pill badge-light commercial">COMMERCIAL</span>) : item.lob === 'MEDICARE' && (<span className="badge badge-pill badge-light medicare">MEDICARE</span>)} </td>
                 <td>
 
-                    {/* <div class="dropdown">
-                    <button onclick={this.myFunction()} class="dropbtn">Dropdown</button>
-                    <div id="myDropdown" class="dropdown-content">
-                        <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()" />
-                        <a href="#about">About</a>
-                        <a href="#base">Base</a>
-                        <a href="#blog">Blog</a>
-                        <a href="#contact">Contact</a>
-                        <a href="#custom">Custom</a>
-                        <a href="#support">Support</a>
-                        <a href="#tools">Tools</a>
-                    </div>
-                </div> */}
-
                     <div class="dropdown drpdown">
                         <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">Dropdown Example
     <span class="caret"></span></button>
                         <ul class="dropdown-menu">
                             <input class="form-control" id="myInput" type="text" placeholder="Search.." onChange={this.filterFunction} />
                             {dropDownMenuList.map((option) => <li> {option.name} </li>)}
-                            {/* <li><a href="#">HTML</a></li>
-                            <li><a href="#">CSS</a></li>
-                            <li><a href="#">JavaScript</a></li>
-                            <li><a href="#">jQuery</a></li>
-                            <li><a href="#">Bootstrap</a></li>
-                            <li><a href="#">Angular</a></li> */}
                         </ul>
                     </div>
-
-
-                    {/* <select id="items" className="buttonStyle chosen">
-                        <option value="item-1" selected >Unassigned</option>
-                        <option value="item-2"> Assigned </option>
-                        <option value="item-3"> Derek Roberts </option>
-                        <option value="item-4"> Nichole Smith </option>
-                    </select> */}
                 </td>
                 <td>{item.step === 0 ? "In Review" : "In Build"}</td>
                 <td><div class="progress">

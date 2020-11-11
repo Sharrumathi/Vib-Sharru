@@ -2,52 +2,17 @@ import React from 'react';
 import DataTable from './BSTable';
 import NewTable from './NewTable';
 class Table extends React.Component {
-    constructor(props) {
-        super(props);
-    };
-    render() {
-        return (
+  constructor(props) {
+    super(props);
+  };
+  render() {
+    return (
 
-            <div>
-                {/* <DataTable /> */}
-
-                <NewTable />
-
-                {/* <center> 
-        <h1>GeeksforGeeks</h1> 
-        <h2>Row spacing in a table</h2> 
-        <table> 
-            <tr> 
-                <th>Employee ID</th> 
-                <th>Name</th> 
-                <th>Gender</th> 
-                <th>Age</th> 
-            </tr> 
-        </table> 
-        <table class = "gfg"> 
-            <tr> 
-                <td class = "geeks">10001</td> 
-                <td>Thomas</td> 
-                <td>M</td> 
-                <td>32</td> 
-            </tr> 
-            <tr> 
-                <td class = "geeks">10002</td> 
-                <td>Sally</td> 
-                <td>F</td> 
-                <td>28</td> 
-            </tr> 
-            <tr> 
-                <td class = "geeks">10003</td> 
-                <td>Anthony</td> 
-                <td>M</td> 
-                <td>24</td> 
-            </tr> 
-        </table> 
-        </center>  */}
-            </div>
-        );
-    }
+      <div>
+        <NewTable />
+      </div>
+    );
+  }
 };
 
 export default Table;
