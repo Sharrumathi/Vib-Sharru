@@ -117,12 +117,31 @@ const DropdownIndicator = () => (
 );
 
 const dropDownMenuList = [
-    { name: 'Unassigned', value: 'Unassigned' },
-    { name: 'Assigned', value: 'Assigned' },
-    { name: 'Derek Roberts', value: 'Derek Roberts' },
-    { name: 'Nichole Smith', value: 'Nichole Smith' },
+    { label: 'Unassigned', value: 'Unassigned' },
+    { label: 'Assigned', value: 'Assigned' },
+    { label: 'Derek Roberts', value: 'Derek Roberts' },
+    { label: 'Nichole Smith', value: 'Nichole Smith' },
 
 ]
+
+const customStyles = {
+    option: (provided, state) => ({
+        ...provided,
+        borderBottom: '1px dotted pink',
+        color: state.isSelected ? 'red' : 'blue',
+        padding: 20,
+    }),
+    control: () => ({
+        // none of react-select's styles are passed to <Control />
+        width: 200,
+    }),
+    singleValue: (provided, state) => {
+        const opacity = state.isDisabled ? 0.5 : 1;
+        const transition = 'opacity 300ms';
+
+        return { ...provided, opacity, transition };
+    }
+}
 
 class Table extends React.Component {
     constructor(props) {
@@ -135,10 +154,11 @@ class Table extends React.Component {
             currentPage: 0,
             activePage: 1,
             pageRangeDisplayed: 5,
-            postData: []
+            postData: [],
+            value1: false,
+            value2: false
         }
         this.onMultiSelect = this.onMultiSelect.bind(this)
-        this.filterFunction = this.filterFunction.bind(this)
     };
 
     onMultiSelect() {
@@ -156,25 +176,16 @@ class Table extends React.Component {
         this.receivedData();
     }
 
-    filterFunction(e) {
-        console.log('valueeee for filter', e.target.value)
-        var input, filter, ul, li, a, i;
-        input = e.target.value;
-        filter = dropDownMenuList.filter(item => {
-            // const res = item.name.fi
-        });
-        console.log('filter', filter)
-        // div = document.getElementById("myDropdown");
-        // a = div.getElementsByTagName("a");
-        // for (i = 0; i < a.length; i++) {
-        //     txtValue = a[i].textContent || a[i].innerText;
-        //     if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        //         a[i].style.display = "";
-        //     } else {
-        //         a[i].style.display = "none";
-        //     }
-        // }
-    }
+    onChange = option => {
+        if (this.state.value2.value === option.value) {
+            this.setState({
+                value1: option,
+                value2: false
+            });
+        } else {
+            this.setState({ value1: option });
+        }
+    };
 
     receivedData() {
 
@@ -206,18 +217,16 @@ class Table extends React.Component {
                 <td>{item.lob === 'MEDICAID' ? (<span className="badge badge-pill badge-light peach">MEDICAID</span>) : item.lob === 'EXCHANGE' ? (<span className="badge badge-pill badge-light exchange">EXCHANGE</span>) : item.lob === 'COMMERCIAL' ? (<span className="badge badge-pill badge-light commercial">COMMERCIAL</span>) : item.lob === 'MEDICARE' && (<span className="badge badge-pill badge-light medicare">MEDICARE</span>)} </td>
 
                 <td>
-                    <span> { item.subTask }</span>
+                    <span> {item.subTask}</span>
                 </td>
 
                 <td>
-
-                    <div class="dropdown drpdown">
-                        <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">Dropdown Example
-                        <span class="caret"></span></button>
-                        <ul class="dropdown-menu">
-                            <input class="form-control" id="myInput" type="text" placeholder="Search.." onChange={this.filterFunction} />
-                            {dropDownMenuList.map((option) => <li> {option.name} </li>)}
-                        </ul>
+                    <div>
+                        <Select
+                            onChange={this.onChange}
+                            options={dropDownMenuList}
+                            value={this.state.value1}
+                        />
                     </div>
                 </td>
                 <td>{item.step === 0 ? "In Review" : "In Build"}</td>
