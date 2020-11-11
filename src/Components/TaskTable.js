@@ -1,5 +1,6 @@
 import React from 'react';
-import icon from "../Components/Image/Vector-page-001.jpg"
+// import icon from "../Components/Image/Vector-page-001.jpg"
+// import icon from "public\images\Vector-page-001.jpg";
 import Pagination from "react-js-pagination";
 import ReactPaginate from 'react-paginate';
 import Select from 'react-select';
@@ -10,7 +11,7 @@ const sampleJson = [
         "id": 1,
         "taskName": 'task 1',
         "lob": 'MEDICARE',
-        "subTask": 'aaa',
+        "subTask": 'Sub Task 1',
         "step": 0,
         "dueDate": '70%',
         "due": '09/10/1990 @9.00 AM'
@@ -19,7 +20,7 @@ const sampleJson = [
         "id": 2,
         "taskName": 'task 2',
         "lob": 'COMMERCIAL',
-        "subTask": 'bbb',
+        "subTask": 'Sub Task 2',
         "step": 0,
         "dueDate": '30%',
         "due": '07/10/2000 @10.30 AM'
@@ -28,7 +29,7 @@ const sampleJson = [
         "id": 3,
         "taskName": 'task 3',
         "lob": 'EXCHANGE',
-        "subTask": 'ccc',
+        "subTask": 'Sub Task 3',
         "step": 1,
         "dueDate": '50%',
         "due": '23/10/2003 @7.45 PM'
@@ -37,7 +38,7 @@ const sampleJson = [
         "id": 4,
         "taskName": 'task 4',
         "lob": 'MEDICAID',
-        "subTask": 'ddd',
+        "subTask": 'Sub Task 4',
         "step": 1,
         "dueDate": '45%',
         "due": '25/6/2008 @4.00 PM'
@@ -46,7 +47,7 @@ const sampleJson = [
         "id": 5,
         "taskName": 'task 5',
         "lob": 'EXCHANGE',
-        "subTask": 'eee',
+        "subTask": 'Sub Task 5',
         "step": 1,
         "dueDate": '85%',
         "due": '09/01/1992 @3.00 AM'
@@ -55,7 +56,7 @@ const sampleJson = [
         "id": 6,
         "taskName": 'task 6',
         "lob": 'MEDICAID',
-        "subTask": 'ddd',
+        "subTask": 'Sub Task 6',
         "step": 0,
         "dueDate": '90%',
         "due": '30/02/2000 @9.20 PM'
@@ -65,7 +66,7 @@ const sampleJson = [
         "id": 7,
         "taskName": 'task 7',
         "lob": 'MEDICAID',
-        "subTask": 'eee',
+        "subTask": 'Sub Task 7',
         "step": 1,
         "dueDate": '20%',
         "due": '14/07/2002 @3.20 AM'
@@ -74,7 +75,7 @@ const sampleJson = [
         "id": 8,
         "taskName": 'task 8',
         "lob": 'EXCHANGE',
-        "subTask": 'fff',
+        "subTask": 'Sub Task 8',
         "step": 1,
         "dueDate": '50%',
         "due": '11/11/2010 @2.00 PM'
@@ -83,7 +84,7 @@ const sampleJson = [
         "id": 9,
         "taskName": 'task 9',
         "lob": 'MEDICAID',
-        "subTask": 'ggg',
+        "subTask": 'Sub Task 9',
         "step": 0,
         "dueDate": '73%',
         "due": '20/20/2020 @12.00 PM'
@@ -203,11 +204,16 @@ class Table extends React.Component {
                 <td><input type="checkbox" aria-label="Checkbox for following text input" /></td>
                 <td>{item.taskName}</td>
                 <td>{item.lob === 'MEDICAID' ? (<span className="badge badge-pill badge-light peach">MEDICAID</span>) : item.lob === 'EXCHANGE' ? (<span className="badge badge-pill badge-light exchange">EXCHANGE</span>) : item.lob === 'COMMERCIAL' ? (<span className="badge badge-pill badge-light commercial">COMMERCIAL</span>) : item.lob === 'MEDICARE' && (<span className="badge badge-pill badge-light medicare">MEDICARE</span>)} </td>
+
+                <td>
+                    <span> { item.subTask }</span>
+                </td>
+
                 <td>
 
                     <div class="dropdown drpdown">
                         <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">Dropdown Example
-    <span class="caret"></span></button>
+                        <span class="caret"></span></button>
                         <ul class="dropdown-menu">
                             <input class="form-control" id="myInput" type="text" placeholder="Search.." onChange={this.filterFunction} />
                             {dropDownMenuList.map((option) => <li> {option.name} </li>)}
@@ -313,7 +319,7 @@ class Table extends React.Component {
                         <table className="table table-bordered">
                             <thead className="table-bordered ">
                                 <tr>
-                                    <th scope="col" className="headerWidth"><div className="imgProcess"> <img src={icon} className="rounded mx-auto d-block" alt="#1" /> </div></th>
+                                    <th scope="col" className="headerWidth"><div className="imgProcess"> <img src="images/Vector-page-001.jpg" className="rounded mx-auto d-block" alt="#1" /> </div></th>
                                     <th scope="col" className="headerWidth">
                                         <input type="checkbox" aria-label="Checkbox for following text input" />
                                     </th>
@@ -321,55 +327,13 @@ class Table extends React.Component {
                                     <th scope="col">LOB</th>
                                     <th scope="col">SUBTASKS</th>
                                     <th scope="col">ASSIGNED TO</th>
+                                    <th scope="col">STEPS</th>
                                     <th scope="col">DUE DATE</th>
                                 </tr>
                             </thead>
                             <tbody>
 
                                 {this.state.postData}
-                                {/* {
-                                    this.state.data.length !== 0 && slice.map((item) =>
-                                        <tr key={item.id}>
-                                            <th scope="row"></th>
-                                            <td><input type="checkbox" aria-label="Checkbox for following text input" /></td>
-                                            <td>{item.taskName}</td>
-                                            <td>{item.lob === 'MEDICAID' ? (<span className="badge badge-pill badge-light peach">MEDICAID</span>) : item.lob === 'EXCHANGE' ? (<span className="badge badge-pill badge-light exchange">EXCHANGE</span>) : item.lob === 'COMMERCIAL' ? (<span className="badge badge-pill badge-light commercial">COMMERCIAL</span>) : item.lob === 'MEDICARE' && (<span className="badge badge-pill badge-light medicare">MEDICARE</span>)} </td>
-                                            <td>
-                                                <div class="dropdown">
-                                                    <button onclick="myFunction()" class="dropbtn">Dropdown</button>
-                                                    <div id="myDropdown" class="dropdown-content">
-                                                        <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()" />
-                                                        <a href="#about">About</a>
-                                                        <a href="#base">Base</a>
-                                                        <a href="#blog">Blog</a>
-                                                        <a href="#contact">Contact</a>
-                                                        <a href="#custom">Custom</a>
-                                                        <a href="#support">Support</a>
-                                                        <a href="#tools">Tools</a>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>{item.step === 0 ? "In Review" : "In Build"}</td>
-                                            <td>{<meter id="disk_d" className="disk_d" value="0.6">60%</meter>}</td>
-                                        </tr>
-                                    )
-                                } */}
-
-
-                                {/* 
-                                <tr>
-                                    <th scope="row"></th>
-                                    <td><input type="checkbox" aria-label="Checkbox for following text input" /></td>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>@fat</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row"></th>
-                                    <td><input type="checkbox" aria-label="Checkbox for following text input" /></td>
-                                    <td colSpan="2">Larry the Bird</td>
-                                    <td>@twitter</td>
-                                </tr> */}
                             </tbody>
                         </table>
 
